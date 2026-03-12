@@ -3,50 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-clifford: #da373d;
+      }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dbd9d9;
+        }
+    </style>
     <title>MSEUF-CI Employees</title>
 </head>
-<body>
-    <h1>MSEUF-CI EMPLOYEES</h1>
-    <div id="container" style="display: flex">
-        <div id="form" style="padding-right: 5rem; display: inline;">
-            <label for="">First Name</label>
-            <input type="text" name="fname" id="fname"><br>
+<body class="w-screen h-full">
+    <h1 class="text-center text-red-800 text-4xl m-4 font-bold">MSEUF-CI EMPLOYEES</h1>
+    <div id="container" class="flex justify-center">
+        <div id="form" class="border-2 border-red-800 rounded-lg w-50% px-4 py-2">
+            <div class="w-full">
+                <div class="flex justify-center gap-4">
+                    <label for="">First Name: </label>
+                    <input type="text" name="fname" id="fname" class="border-b border-red-600"><br>
 
-            <label for="">Last Name</label>
-            <input type="text" name="lname" id="lname"><br>
+                    <label for="">Last Name:</label>
+                    <input type="text" name="lname" id="lname" class="border-b border-red-600"><br>
+                </div>
+            
+                <div">
+                    <label for="">Email:</label>
+                    <input type="text" name="email" id="email" class=" border-b border-red-600 w-55 ml-3">
 
-            <label for="">Email</label>
-            <input type="text" name="email" id="email"><br>
+                    <label for="gender" class="ml-7">Gender</label>
+                    <select type="text" name="gender" id="gender" class="text-red-800 text-sm underline ">
+                        <option value="Male"> Male</option>
+                        <option value="Female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            
 
-            <label for="">Gender</label>
-            <select type="text" name="gender" id="gender">
-                <option value="Male"> Male</option>
-                <option value="Female">Female</option>
-                <option value="other">Other</option>
-            </select>
-
-            <button id="add"> Add Employee</button>
-            <button id="update"> Update</button>
-            <input type="hidden" id="ID">
+                <div class="flex justify-end gap-3">
+                    <button id="add" class="border-red-800 border rounded-lg px-2 mt-4 w-35 hover:bg-red-800 hover:text-white"> Add Employee</button>
+                    <button id="update" class="border-red-800 border rounded-lg px-2 mt-4 w-35 hover:bg-red-800 hover:text-white"> Update</button>
+                    <input type="hidden" id="ID">
+                </div>
+            
+            </div>
         </div>
 
 
     </div>
 
+    <div class="mt-6 px-20  overflow-y-auto h-screen flex justify-center">
+        <table class="table-auto border-spacing-0 border-2 border-red-800 h-1/2">
+            <thead class="sticky top-0 z-10">
+                <tr class="bg-red-900">
+                    <th class="p-3 text-left text-white">Name</th>
+                    <th class="p-3 text-left text-white">Email</th>
+                    <th class="p-3 text-left text-white">Gender</th>
+                    <th class="p-3 text-left text-white">Action</th>
+                </tr>
+            </thead>
+            <tbody id="content"></tbody>
+        </table>
+    </div>
 
-
-
-
-
-
-    <ul id="content">
+    <!-- <ul id="content">
         
-    </ul>
-
-
-
-
-
+    </ul> -->
 
 
         <script src="index.js"></script>
