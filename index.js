@@ -42,12 +42,21 @@ function getUsers(){
     .then(data=>{
         console.log(data);
         data.forEach(element=>{
-            html+=`<li> ${element.first_name} ${element.last_name} <a href="javascript:void(0)" onClick="deleteMember(${element.id})">Delete</a>
-            <a href="javascript:void(0)" onClick="updateMember(${element.id})">Update</a></li>`
+            // html+=`<li> ${element.first_name} ${element.last_name} <a href="javascript:void(0)" onClick="deleteMember(${element.id})">Delete</a>
+            // <a href="javascript:void(0)" onClick="updateMember(${element.id})">Update</a></li>`
 
-            
+            html+=`
+            <tr>
+                <td>${element.first_name} ${element.last_name}</td>
+                <td>${element.email}</td>
+                <td>${element.gender}</td>
+                <td>
+                    <a href="javascript:void(0) id="add" onClick="deleteMember(${element.id})" class="border-red-800 border rounded-lg px-2 mt-4 w-auto hover:bg-red-800 hover:text-white"> Delete</a>
+                    
+                    <a href="javascript:void(0) id="update" onClick="updateMember(${element.id})" class="border-red-800 border rounded-lg px-2 mt-4 w-auto hover:bg-red-800 hover:text-white"> Update</button>
+                </td>
+            </tr>`    
         })
-
         content.innerHTML=html;
     })
     .catch(error=>{
@@ -62,24 +71,25 @@ function deleteMember(id){
     let text;
 
     if (confirm("Press a button!") == true) {
-        text = "You pressed ok";
+        
     
-    fetch("http://localhost:7400/api/users",{
-        method:'DELETE',
-        body: JSON.stringify({id}),
-        headers:{
-            "Content-Type":"application/json",
-        },
-    }).then(response=> response.text())
-    .then(response=>console.log(response))
-    .catch(error=>{
-        console.log(error);
-    })}     
-    else {
-        text = "you cancelled";}
-
-        location.reload();
+        fetch("http://localhost:7400/api/users",{
+            method:'DELETE',
+            body: JSON.stringify({id}),
+            headers:{
+                "Content-Type":"application/json",
+            },
+        })
+        .then(response=> {
+            if (response.ok) {
+                alert("User Deleted Successfully");
+                location.reload();
+            } else {
+                alert ("Error Deleting User");
+            }
+        }).catch(error => console.log(error));
     }
+}
 
     // search
     function updateMember(id){
